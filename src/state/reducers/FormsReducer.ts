@@ -2,6 +2,9 @@ import { FormsActionType } from "../action-types/action_types";
 import {
   DecrementFormsIndex,
   IncrementFormsIndex,
+  SetCircularFormLatitude,
+  SetCircularFormLongitude,
+  SetCircularFormRadius,
 } from "../actions/forms_actions";
 import { FormName } from "../util";
 
@@ -45,7 +48,12 @@ export const initialFormsState: FormsState = {
 
 const formsReducer = (
   state: FormsState = initialFormsState,
-  action: IncrementFormsIndex | DecrementFormsIndex
+  action:
+    | IncrementFormsIndex
+    | DecrementFormsIndex
+    | SetCircularFormLatitude
+    | SetCircularFormLongitude
+    | SetCircularFormRadius
 ): FormsState => {
   switch (action.type) {
     case FormsActionType.INCREMENT_FORM_INDEX:
@@ -54,6 +62,21 @@ const formsReducer = (
     case FormsActionType.DECREMENT_FORM_INDEX:
       if (state.formIndex - 1 < 0) return state;
       return { ...state, formIndex: state.formIndex - 1 };
+    case FormsActionType.SET_CIRCULAR_FORM_LATITUDE:
+      return {
+        ...state,
+        circularForm: { ...state.circularForm, latitude: action.payload },
+      };
+    case FormsActionType.SET_CIRCULAR_FORM_LONGITUDE:
+      return {
+        ...state,
+        circularForm: { ...state.circularForm, longitude: action.payload },
+      };
+    case FormsActionType.SET_CIRCULAR_FORM_RADIUS:
+      return {
+        ...state,
+        circularForm: { ...state.circularForm, radius: action.payload },
+      };
     default:
       return state;
   }

@@ -7,3 +7,18 @@ export interface IncrementFormsIndex {
 export interface DecrementFormsIndex {
   type: FormsActionType.DECREMENT_FORM_INDEX;
 }
+
+export interface SetCircularFormLatitude {
+  type: FormsActionType.SET_CIRCULAR_FORM_LATITUDE;
+  payload: string;
+}
+
+export interface SetCircularFormLongitude {
+  type: FormsActionType.SET_CIRCULAR_FORM_LONGITUDE;
+  payload: string;
+}
+
+export interface SetCircularFormRadius {
+  type: FormsActionType.SET_CIRCULAR_FORM_RADIUS;
+  payload: string;
+}

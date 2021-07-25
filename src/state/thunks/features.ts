@@ -1,3 +1,4 @@
+import { AppDispatch, RootState } from "..";
 import earthquakeClient from "../../api/earthquake_client";
 import {
   setFeaturesError,
@@ -8,7 +9,8 @@ import {
 } from "../action-creators";
 
 export const fetchCircularData =
-  (latitude: any, longitude: any, maxRadiusKm: any) => async (dispatch: any, getState: any) => {
+  (latitude: any, longitude: any, maxRadiusKm: any): any =>
+  async (dispatch: AppDispatch, getState: RootState) => {
     dispatch(setFeaturesLoading());
     dispatch(setPaginationIndex(0));
     dispatch(setPaginationPage(1));
@@ -34,8 +36,8 @@ export const fetchRectangular =
     minLongitude: string,
     maxLatitude: string,
     maxLongitude: string
-  ) =>
-  async (dispatch: any, getState: any) => {
+  ): any =>
+  async (dispatch: AppDispatch, getState: RootState) => {
     dispatch(setFeaturesLoading());
     dispatch(setPaginationIndex(0));
     dispatch(setPaginationPage(1));

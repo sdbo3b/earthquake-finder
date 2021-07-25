@@ -11,7 +11,7 @@ import {
 } from "../actions/index";
 import { FeaturesStatus } from "../util";
 
-export const setFeaturesIdle = () => {
+export const setFeaturesIdle = (): any => {
   return (dispatch: Dispatch<FeaturesIdle>) => {
     dispatch({
       type: FeaturesActionType.FEATURES_IDLE,
@@ -20,7 +20,7 @@ export const setFeaturesIdle = () => {
   };
 };
 
-export const setFeaturesLoading = () => {
+export const setFeaturesLoading = (): any => {
   return (dispatch: Dispatch<FeaturesLoading>) => {
     dispatch({
       type: FeaturesActionType.FEATURES_LOADING,
@@ -29,7 +29,7 @@ export const setFeaturesLoading = () => {
   };
 };
 
-export const setFeaturesLoaded = (payload: Feature[]) => {
+export const setFeaturesLoaded = (payload: Feature[]): any => {
   return (dispatch: Dispatch<FeaturesLoaded>) => {
     dispatch({
       type: FeaturesActionType.FEATURES_LOADED,
@@ -39,7 +39,7 @@ export const setFeaturesLoaded = (payload: Feature[]) => {
   };
 };
 
-export const setFeaturesError = () => {
+export const setFeaturesError = (): any => {
   return (dispatch: Dispatch<FeaturesError>) => {
     dispatch({
       type: FeaturesActionType.FEATURES_ERROR,
@@ -48,7 +48,7 @@ export const setFeaturesError = () => {
   };
 };
 
-export const setPaginationIndex = (payload: number) => {
+export const setPaginationIndex = (payload: number): any => {
   return (dispatch: Dispatch<SetPaginationIndex>) => {
     dispatch({
       type: FeaturesActionType.SET_PAGINATION_INDEX,
@@ -57,7 +57,7 @@ export const setPaginationIndex = (payload: number) => {
   };
 };
 
-export const setPaginationPage = (payload: number) => {
+export const setPaginationPage = (payload: number): any => {
   return (dispatch: Dispatch<SetPaginationPage>) => {
     dispatch({
       type: FeaturesActionType.SET_PAGINATION_PAGE,
