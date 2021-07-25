@@ -6,6 +6,13 @@ export enum FeaturesStatus {
 }
 
 export enum TabName {
-  COORDINATES = "Coordinates",
+  CIRCULAR = "Circular",
+  RECTANGULAR = "Rectangular",
+  MAP = "Map",
+}
+
+export enum FormName {
+  CIRCULAR = "Circular",
+  RECTANGULAR = "Rectangular",
   MAP = "Map",
 }

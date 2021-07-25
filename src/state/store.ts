@@ -3,18 +3,17 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { State } from ".";
 import reducers from "./reducers";
-import {
-  initialShapeState,
-  initialFeaturesState,
-  initialTabState,
-} from "./reducers/index";
+import { initialFeaturesState, initialFormsState } from "./reducers/index";
 
 const initialState: State = {
-  shape: initialShapeState,
+  formsState: initialFormsState,
   features: initialFeaturesState,
-  tab: initialTabState,
 };
 
 const composedEnhancer = composeWithDevTools(applyMiddleware(thunk));
 
 export const store = createStore(reducers, initialState, composedEnhancer);
+
+export type AppDispatch = typeof store.dispatch;
+
+export type RootState = ReturnType<typeof store.getState>;

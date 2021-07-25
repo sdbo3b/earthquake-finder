@@ -1,16 +1,13 @@
 import { combineReducers } from "redux";
-import shapeReducer from "./shapeReducer";
 import featureReducer from "./featureReducer";
-import tabReducer from "./tabReducer";
+import formsReducer from "./FormsReducer";
 
 export * from "./featureReducer";
-export * from "./tabReducer";
-export * from "./shapeReducer";
+export * from "./FormsReducer";
 
 const reducers = combineReducers({
-  shape: shapeReducer,
+  formsState: formsReducer,
   features: featureReducer,
-  tab: tabReducer,
 });
 
 export default reducers;
