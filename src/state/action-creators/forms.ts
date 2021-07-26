@@ -38,3 +38,35 @@ export const setCircularFormRadius = (payload: string): any => {
       payload,
     });
 };
+
+export const setRectangularFormMinLatitude = (payload: string): any => {
+  return (dispatch: AppDispatch) =>
+    dispatch({
+      type: FormsActionType.SET_RECTANGULAR_FORM_MIN_LATITUDE,
+      payload,
+    });
+};
+
+export const setRectangularFormMaxLatitude = (payload: string): any => {
+  return (dispatch: AppDispatch) =>
+    dispatch({
+      type: FormsActionType.SET_RECTANGULAR_FORM_MAX_LATITUDE,
+      payload,
+    });
+};
+
+export const setRectangularFormMinLongitude = (payload: string): any => {
+  return (dispatch: AppDispatch) =>
+    dispatch({
+      type: FormsActionType.SET_RECTANGULAR_FORM_MIN_LONGITUDE,
+      payload,
+    });
+};
+
+export const setRectangularFormMaxLongitude = (payload: string): any => {
+  return (dispatch: AppDispatch) =>
+    dispatch({
+      type: FormsActionType.SET_RECTANGULAR_FORM_MAX_LONGITUDE,
+      payload,
+    });
+};

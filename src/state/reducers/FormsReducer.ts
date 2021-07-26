@@ -5,6 +5,10 @@ import {
   SetCircularFormLatitude,
   SetCircularFormLongitude,
   SetCircularFormRadius,
+  SetRectangularFormMaxLatitude,
+  SetRectangularFormMaxLongitude,
+  SetRectangularFormMinLatitude,
+  SetRectangularFormMinLongitude,
 } from "../actions/forms_actions";
 import { FormName } from "../util";
 
@@ -54,6 +58,10 @@ const formsReducer = (
     | SetCircularFormLatitude
     | SetCircularFormLongitude
     | SetCircularFormRadius
+    | SetRectangularFormMinLatitude
+    | SetRectangularFormMaxLatitude
+    | SetRectangularFormMinLongitude
+    | SetRectangularFormMaxLongitude
 ): FormsState => {
   switch (action.type) {
     case FormsActionType.INCREMENT_FORM_INDEX:
@@ -76,6 +84,38 @@ const formsReducer = (
       return {
         ...state,
         circularForm: { ...state.circularForm, radius: action.payload },
+      };
+    case FormsActionType.SET_RECTANGULAR_FORM_MIN_LATITUDE:
+      return {
+        ...state,
+        rectangularForm: {
+          ...state.rectangularForm,
+          minLatitude: action.payload,
+        },
+      };
+    case FormsActionType.SET_RECTANGULAR_FORM_MAX_LATITUDE:
+      return {
+        ...state,
+        rectangularForm: {
+          ...state.rectangularForm,
+          maxLatitude: action.payload,
+        },
+      };
+    case FormsActionType.SET_RECTANGULAR_FORM_MIN_LONGITUDE:
+      return {
+        ...state,
+        rectangularForm: {
+          ...state.rectangularForm,
+          minLongitude: action.payload,
+        },
+      };
+    case FormsActionType.SET_RECTANGULAR_FORM_MAX_LONGITUDE:
+      return {
+        ...state,
+        rectangularForm: {
+          ...state.rectangularForm,
+          maxLongitude: action.payload,
+        },
       };
     default:
       return state;

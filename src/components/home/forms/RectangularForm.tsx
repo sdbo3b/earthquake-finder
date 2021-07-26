@@ -1,8 +1,32 @@
 import React from "react";
 import { Globe, Search } from "react-feather";
+import {
+  setRectangularFormMaxLatitude,
+  setRectangularFormMaxLongitude,
+  setRectangularFormMinLatitude,
+  setRectangularFormMinLongitude,
+} from "../../../state/action-creators";
+import { useAppDispatch, useAppSelector } from "../../../state/hooks";
+import { fetchRectangular } from "../../../state/thunks";
 import "../../../styles/forms/form.css";
 
 const RectangularForm: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const rectangularFormState = useAppSelector(
+    (state) => state.formsState.rectangularForm
+  );
+
+  const onSubmit = (e: any) => {
+    dispatch(
+      fetchRectangular(
+        rectangularFormState.minLatitude,
+        rectangularFormState.minLongitude,
+        rectangularFormState.maxLatitude,
+        rectangularFormState.maxLongitude
+      )
+    );
+  };
+
   return (
     <div className="flex-grow-1">
       <div className="row gy-0 gx-0 align-items-center justify-content-center">
@@ -16,6 +40,10 @@ const RectangularForm: React.FC = () => {
               type="text"
               placeholder="Min Latitude"
               className="form-input-field"
+              value={rectangularFormState.minLatitude}
+              onChange={(e) =>
+                dispatch(setRectangularFormMinLatitude(e.target.value))
+              }
             />
           </div>
           <div className="w-100"></div>
@@ -27,6 +55,10 @@ const RectangularForm: React.FC = () => {
               type="text"
               placeholder="Max Latitude"
               className="form-input-field"
+              value={rectangularFormState.maxLatitude}
+              onChange={(e) =>
+                dispatch(setRectangularFormMaxLatitude(e.target.value))
+              }
             />
           </div>
         </div>
@@ -40,6 +72,10 @@ const RectangularForm: React.FC = () => {
               type="text"
               placeholder="Min Longitude"
               className="form-input-field"
+              value={rectangularFormState.minLongitude}
+              onChange={(e) =>
+                dispatch(setRectangularFormMinLongitude(e.target.value))
+              }
             />
           </div>
           <div className="w-100"></div>
@@ -52,6 +88,10 @@ const RectangularForm: React.FC = () => {
               type="text"
               placeholder="Max Longitude"
               className="form-input-field"
+              value={rectangularFormState.maxLongitude}
+              onChange={(e) =>
+                dispatch(setRectangularFormMaxLongitude(e.target.value))
+              }
             />
           </div>
         </div>
@@ -59,7 +99,7 @@ const RectangularForm: React.FC = () => {
           <i className="icon">
             <Search />
           </i>
-          <button type="submit" className="form-button">
+          <button type="submit" className="form-button" onClick={onSubmit}>
             Search
           </button>
         </div>
