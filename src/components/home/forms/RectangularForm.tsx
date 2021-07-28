@@ -45,12 +45,16 @@ const RectangularForm: React.FC = () => {
       <div className="row gy-0 gx-0 align-items-center justify-content-center">
         <h2 className="fs-5 col-12 text-center text-danger">{isError()}</h2>
         <div className="col-sm-12 row justify-content-center">
+          <label htmlFor="min-latitude" className="text-center">
+            Minimum Latitude
+          </label>
           <div className="form-input-icon col-sm-6 ">
             <i className="icon">
               <Globe />
             </i>
             <input
               type="text"
+              name="min-latitude"
               placeholder="Min Latitude"
               className="form-input-field"
               value={rectangularFormState.minLatitude}
@@ -60,12 +64,16 @@ const RectangularForm: React.FC = () => {
             />
           </div>
           <div className="w-100"></div>
+          <label htmlFor="max-latitude" className="text-center">
+            Maximum Latitude
+          </label>
           <div className="form-input-icon col-sm-6">
             <i className="icon">
               <Globe />
             </i>
             <input
               type="text"
+              name="max-latitude"
               placeholder="Max Latitude"
               className="form-input-field"
               value={rectangularFormState.maxLatitude}
@@ -77,12 +85,16 @@ const RectangularForm: React.FC = () => {
         </div>
 
         <div className="col-12 row justify-content-center">
+          <label htmlFor="min-longitude" className="text-center">
+            Minimum Longitude
+          </label>
           <div className="form-input-icon col-sm-6">
             <i className="icon">
               <Globe />
             </i>
             <input
               type="text"
+              name="min-longitude"
               placeholder="Min Longitude"
               className="form-input-field"
               value={rectangularFormState.minLongitude}
@@ -93,12 +105,16 @@ const RectangularForm: React.FC = () => {
           </div>
           <div className="w-100"></div>
 
+          <label htmlFor="max-longitude" className="text-center">
+            Maximum Longitude
+          </label>
           <div className="form-input-icon col-sm-6">
             <i className="icon">
               <Globe />
             </i>
             <input
               type="text"
+              name="max-longitude"
               placeholder="Max Longitude"
               className="form-input-field"
               value={rectangularFormState.maxLongitude}

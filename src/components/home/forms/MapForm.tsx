@@ -6,7 +6,7 @@ const MapForm: React.FC = () => {
   return (
     <div className="d-flex h-100">
       <div className="d-flex flex-column align-items-center w-100">
-        <h2 className="fs-5">Error</h2>
+        <h2 className="fs-5">{""}</h2>
         <div className="form-input-icon">
           <i className="icon">
             <Globe />
