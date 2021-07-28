@@ -46,7 +46,7 @@ const RectangularForm: React.FC = () => {
         <h2 className="fs-5 col-12 text-center text-danger">{isError()}</h2>
         <div className="col-sm-12 row justify-content-center">
           <label htmlFor="min-latitude" className="text-center">
-            Minimum Latitude
+            Minimum Latitude (Decimal [-90,90] degrees)
           </label>
           <div className="form-input-icon col-sm-6 ">
             <i className="icon">
@@ -65,7 +65,7 @@ const RectangularForm: React.FC = () => {
           </div>
           <div className="w-100"></div>
           <label htmlFor="max-latitude" className="text-center">
-            Maximum Latitude
+            Maximum Latitude (Decimal [-90,90] degrees)
           </label>
           <div className="form-input-icon col-sm-6">
             <i className="icon">
@@ -86,7 +86,7 @@ const RectangularForm: React.FC = () => {
 
         <div className="col-12 row justify-content-center">
           <label htmlFor="min-longitude" className="text-center">
-            Minimum Longitude
+            Minimum Longitude (Decimal [-360,360] degrees)
           </label>
           <div className="form-input-icon col-sm-6">
             <i className="icon">
@@ -106,7 +106,7 @@ const RectangularForm: React.FC = () => {
           <div className="w-100"></div>
 
           <label htmlFor="max-longitude" className="text-center">
-            Maximum Longitude
+            Maximum Longitude (Decimal [-360,360] degrees)
           </label>
           <div className="form-input-icon col-sm-6">
             <i className="icon">

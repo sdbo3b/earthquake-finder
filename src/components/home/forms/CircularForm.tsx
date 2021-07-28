@@ -48,7 +48,7 @@ const CircularForm: React.FC = () => {
         <h2 className="fs-5 col-12 text-center text-danger">{isError()}</h2>
         <div className="col-sm-12 row justify-content-center">
           <label htmlFor="latitude" className="text-center">
-            Latitude
+            Latitude (Decimal [-90,90] degrees)
           </label>
           <div className="form-input-icon col-sm-6 ">
             <i className="icon">
@@ -60,14 +60,15 @@ const CircularForm: React.FC = () => {
               placeholder="Latitude"
               className="form-input-field"
               value={circularFormState.latitude}
-              onChange={(e) =>
-                dispatch(setCircularFormLatitude(e.target.value))
-              }
+              onChange={(e) => {
+                if (e.target.value.match(latRegex))
+                  dispatch(setCircularFormLatitude(e.target.value));
+              }}
             />
           </div>
           <div className="w-100"></div>
           <label htmlFor="longitude" className="text-center">
-            Longitude
+            Longitude (Decimal [-180,180] degrees)
           </label>
           <div className="form-input-icon col-sm-6">
             <i className="icon">
@@ -79,16 +80,17 @@ const CircularForm: React.FC = () => {
               placeholder="Longitude"
               className="form-input-field"
               value={circularFormState.longitude}
-              onChange={(e) =>
-                dispatch(setCircularFormLongitude(e.target.value))
-              }
+              onChange={(e) => {
+                if (e.target.value.match(lonRegex))
+                  dispatch(setCircularFormLongitude(e.target.value));
+              }}
             />
           </div>
         </div>
 
         <div className="col-12 row justify-content-center">
           <label htmlFor="max-radius" className="text-center">
-            Max Radius (km)
+            Max Radius (Decimal [0, 20001.6] km)
           </label>
           <div className="form-input-icon col-sm-6">
             <i className="icon">
@@ -100,7 +102,10 @@ const CircularForm: React.FC = () => {
               placeholder="Max Radius"
               className="form-input-field"
               value={circularFormState.radius}
-              onChange={(e) => dispatch(setCircularFormRadius(e.target.value))}
+              onChange={(e) => {
+                if (e.target.value.match(decimalNumRegex))
+                  dispatch(setCircularFormRadius(e.target.value));
+              }}
             />
           </div>
           <div className="w-100"></div>
