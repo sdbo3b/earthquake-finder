@@ -1,5 +1,5 @@
 import { Feature } from "../../models";
-import { FeaturesStatus } from "../util";
+import { FeaturesStatus, FormName } from "../util";
 import {
   FeaturesIdle,
   FeaturesLoading,
@@ -12,6 +12,10 @@ import { FeaturesActionType } from "../action-types/action_types";
 
 export interface FeaturesState {
   status: FeaturesStatus;
+  error: {
+    form: FormName;
+    msg: string;
+  };
   features: Feature[];
   pagination: {
     pageIndex: number;
@@ -21,6 +25,10 @@ export interface FeaturesState {
 
 export const initialFeaturesState: FeaturesState = {
   status: FeaturesStatus.IDLE,
+  error: {
+    form: FormName.CIRCULAR,
+    msg: "",
+  },
   features: [],
   pagination: {
     pageIndex: 0,
@@ -37,7 +45,7 @@ const featureReducer = (
     | FeaturesError
     | SetPaginationIndex
     | SetPaginationPage
-) => {
+): FeaturesState => {
   switch (action.type) {
     case FeaturesActionType.FEATURES_IDLE:
       return { ...state, status: FeaturesStatus.IDLE };
@@ -53,6 +61,11 @@ const featureReducer = (
       return {
         ...state,
         status: FeaturesStatus.ERROR,
+        error: {
+          ...state.error,
+          form: action.payload.form,
+          msg: action.payload.msg,
+        },
       };
     case FeaturesActionType.SET_PAGINATION_INDEX:
       return {

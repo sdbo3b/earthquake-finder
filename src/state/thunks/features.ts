@@ -7,6 +7,7 @@ import {
   setPaginationIndex,
   setPaginationPage,
 } from "../action-creators";
+import { FormName } from "../util";
 
 export const fetchCircularData =
   (latitude: any, longitude: any, maxRadiusKm: any): any =>
@@ -25,8 +26,12 @@ export const fetchCircularData =
         dispatch(setFeaturesLoaded(features));
       })
       .catch((err) => {
-        dispatch(setFeaturesError());
-        console.log("An error occurred");
+        dispatch(
+          setFeaturesError({
+            form: FormName.CIRCULAR,
+            msg: `Error retrieving data.`,
+          })
+        );
       });
   };
 
@@ -54,7 +59,11 @@ export const fetchRectangular =
         dispatch(setFeaturesLoaded(features));
       })
       .catch((err) => {
-        dispatch(setFeaturesError());
-        console.log("An error occurred");
+        dispatch(
+          setFeaturesError({
+            form: FormName.RECTANGULAR,
+            msg: `Error retrieving data.`,
+          })
+        );
       });
   };

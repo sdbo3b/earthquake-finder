@@ -7,6 +7,7 @@ import {
 } from "../../../state/action-creators";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import { fetchCircularData } from "../../../state/thunks";
+import { FeaturesStatus, FormName } from "../../../state/util";
 import "../../../styles/forms/form.css";
 
 const CircularForm: React.FC = () => {
@@ -14,6 +15,18 @@ const CircularForm: React.FC = () => {
   const circularFormState = useAppSelector(
     (state) => state.formsState.circularForm
   );
+
+  const errorState = useAppSelector((state) => state.featureState.error);
+  const featureStatus = useAppSelector((state) => state.featureState.status);
+
+  const isError = () => {
+    if (
+      errorState.form === FormName.CIRCULAR &&
+      featureStatus === FeaturesStatus.ERROR
+    ) {
+      return errorState.msg;
+    }
+  };
 
   const onSubmit = (e: any) => {
     dispatch(
@@ -28,7 +41,7 @@ const CircularForm: React.FC = () => {
   return (
     <div className="d-flex h-100">
       <div className="d-flex flex-column align-items-center w-100">
-        <h2 className="fs-5">Error</h2>
+        <h2 className="fs-5 text-danger">{isError()}</h2>
         <div className="form-input-icon">
           <i className="icon">
             <Globe />

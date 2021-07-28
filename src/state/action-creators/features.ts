@@ -9,7 +9,7 @@ import {
   SetPaginationIndex,
   SetPaginationPage,
 } from "../actions/index";
-import { FeaturesStatus } from "../util";
+import { FeaturesStatus, FormName } from "../util";
 
 export const setFeaturesIdle = (): any => {
   return (dispatch: Dispatch<FeaturesIdle>) => {
@@ -39,11 +39,15 @@ export const setFeaturesLoaded = (payload: Feature[]): any => {
   };
 };
 
-export const setFeaturesError = (): any => {
+export const setFeaturesError = (payload: {
+  form: FormName;
+  msg: string;
+}): any => {
   return (dispatch: Dispatch<FeaturesError>) => {
     dispatch({
       type: FeaturesActionType.FEATURES_ERROR,
       status: FeaturesStatus.ERROR,
+      payload,
     });
   };
 };

@@ -1,6 +1,6 @@
 import { Feature } from "../../models/index";
 import { FeaturesActionType } from "../action-types/action_types";
-import { FeaturesStatus } from "../util";
+import { FeaturesStatus, FormName } from "../util";
 
 export interface FeaturesIdle {
   type: FeaturesActionType.FEATURES_IDLE;
@@ -21,6 +21,10 @@ export interface FeaturesLoaded {
 export interface FeaturesError {
   type: FeaturesActionType.FEATURES_ERROR;
   status: FeaturesStatus;
+  payload: {
+    form: FormName;
+    msg: string;
+  };
 }
 
 export interface SetPaginationIndex {

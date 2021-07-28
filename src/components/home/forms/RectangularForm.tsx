@@ -8,6 +8,7 @@ import {
 } from "../../../state/action-creators";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import { fetchRectangular } from "../../../state/thunks";
+import { FeaturesStatus, FormName } from "../../../state/util";
 import "../../../styles/forms/form.css";
 
 const RectangularForm: React.FC = () => {
@@ -15,6 +16,18 @@ const RectangularForm: React.FC = () => {
   const rectangularFormState = useAppSelector(
     (state) => state.formsState.rectangularForm
   );
+
+  const errorState = useAppSelector((state) => state.featureState.error);
+  const featureStatus = useAppSelector((state) => state.featureState.status);
+
+  const isError = () => {
+    if (
+      errorState.form === FormName.RECTANGULAR &&
+      featureStatus === FeaturesStatus.ERROR
+    ) {
+      return errorState.msg;
+    }
+  };
 
   const onSubmit = (e: any) => {
     dispatch(
@@ -30,7 +43,7 @@ const RectangularForm: React.FC = () => {
   return (
     <div className="flex-grow-1">
       <div className="row gy-0 gx-0 align-items-center justify-content-center">
-        <h2 className="fs-5 col-12 text-center">Error</h2>
+        <h2 className="fs-5 col-12 text-center text-danger">{isError()}</h2>
         <div className="col-sm-12 row justify-content-center">
           <div className="form-input-icon col-sm-6 ">
             <i className="icon">
