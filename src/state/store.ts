@@ -7,7 +7,7 @@ import { initialFeaturesState, initialFormsState } from "./reducers/index";
 
 const initialState: State = {
   formsState: initialFormsState,
-  features: initialFeaturesState,
+  featureState: initialFeaturesState,
 };
 
 const composedEnhancer = composeWithDevTools(applyMiddleware(thunk));

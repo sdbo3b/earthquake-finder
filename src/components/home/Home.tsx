@@ -1,12 +1,11 @@
 import React from "react";
 import Map from "./Map";
 import "../../styles/App.css";
-import CircularForm from "./forms/CircularForm";
 import FormContainer from "./FormContainer";
 
 const Home: React.FC = () => {
   return (
-    <div className="h-100 text-light primary-color row">
+    <div className="flex-grow-1 text-light primary-color row gy-0 gx-0">
       <div className="col-sm-6 d-flex">
         <FormContainer />
       </div>

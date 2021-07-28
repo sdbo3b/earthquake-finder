@@ -23,7 +23,7 @@ const FormHeader: React.FC = () => {
   const handleIncrement = (e: any) => dispatch(incrementFormsIndex());
 
   return (
-    <div className="row justify-content-center">
+    <div className="row justify-content-center gy-0 gx-0">
       <span
         role="button"
         onClick={handleDecrement}

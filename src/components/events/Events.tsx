@@ -1,9 +1,15 @@
 import React from "react";
+import { useAppSelector } from "../../state/hooks";
+import EventCard from "./EventCard";
 
 const Events: React.FC = () => {
+  const featureState = useAppSelector((state) => state.featureState.features);
+
   return (
-    <div>
-      <div>Events</div>
+    <div className="flex-grow-1 primary-color text-light row gy-0 gx-0 justify-content-center">
+      {featureState.map((feature) => (
+        <EventCard feature={feature} />
+      ))}
     </div>
   );
 };

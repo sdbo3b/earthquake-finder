@@ -7,7 +7,7 @@ export * from "./FormsReducer";
 
 const reducers = combineReducers({
   formsState: formsReducer,
-  features: featureReducer,
+  featureState: featureReducer,
 });
 
 export default reducers;

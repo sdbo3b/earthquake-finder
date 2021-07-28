@@ -22,3 +22,8 @@
 .secondary-color {
   background-color: #2d3249;
 }
+
+.card-map {
+  height: 100%;
+  width: 100%;
+}
