@@ -6,8 +6,7 @@ import {
   FeaturesIdle,
   FeaturesLoaded,
   FeaturesLoading,
-  SetPaginationIndex,
-  SetPaginationPage,
+
 } from "../actions/index";
 import { FeaturesStatus, FormName } from "../util";
 
@@ -52,20 +51,3 @@ export const setFeaturesError = (payload: {
   };
 };
 
-export const setPaginationIndex = (payload: number): any => {
-  return (dispatch: Dispatch<SetPaginationIndex>) => {
-    dispatch({
-      type: FeaturesActionType.SET_PAGINATION_INDEX,
-      payload,
-    });
-  };
-};
-
-export const setPaginationPage = (payload: number): any => {
-  return (dispatch: Dispatch<SetPaginationPage>) => {
-    dispatch({
-      type: FeaturesActionType.SET_PAGINATION_PAGE,
-      payload,
-    });
-  };
-};

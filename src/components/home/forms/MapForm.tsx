@@ -12,7 +12,7 @@ const MapForm: React.FC = () => {
   };
 
   return (
-    <form className="flex-grow-1 d-flex" onSubmit={onSubmit}>
+    <form className="flex-grow-1 d-flex" onSubmit={onSubmit} autoComplete="off">
       <div className="flex-grow-1 row gy-0 gx-0 align-items-center justify-content-center">
         <h2 className="fs-5 col-12 text-center text-danger align-self-start pt-5">
           {isError()}

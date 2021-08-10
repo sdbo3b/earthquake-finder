@@ -26,13 +26,3 @@ export interface FeaturesError {
     msg: string;
   };
 }
-
-export interface SetPaginationIndex {
-  type: FeaturesActionType.SET_PAGINATION_INDEX;
-  payload: number;
-}
-
-export interface SetPaginationPage {
-  type: FeaturesActionType.SET_PAGINATION_PAGE;
-  payload: number;
-}

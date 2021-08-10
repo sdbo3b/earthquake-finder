@@ -5,8 +5,7 @@ import {
   FeaturesLoading,
   FeaturesLoaded,
   FeaturesError,
-  SetPaginationIndex,
-  SetPaginationPage,
+
 } from "../actions/index";
 import { FeaturesActionType } from "../action-types/action_types";
 
@@ -17,10 +16,7 @@ export interface FeaturesState {
     msg: string;
   };
   features: Feature[];
-  pagination: {
-    pageIndex: number;
-    currentPage: number;
-  };
+
 }
 
 export const initialFeaturesState: FeaturesState = {
@@ -30,10 +26,7 @@ export const initialFeaturesState: FeaturesState = {
     msg: "",
   },
   features: [],
-  pagination: {
-    pageIndex: 0,
-    currentPage: 1,
-  },
+
 };
 
 const featureReducer = (
@@ -43,8 +36,6 @@ const featureReducer = (
     | FeaturesLoading
     | FeaturesLoaded
     | FeaturesError
-    | SetPaginationIndex
-    | SetPaginationPage
 ): FeaturesState => {
   switch (action.type) {
     case FeaturesActionType.FEATURES_IDLE:
@@ -67,16 +58,7 @@ const featureReducer = (
           msg: action.payload.msg,
         },
       };
-    case FeaturesActionType.SET_PAGINATION_INDEX:
-      return {
-        ...state,
-        pagination: { ...state.pagination, pageIndex: action.payload },
-      };
-    case FeaturesActionType.SET_PAGINATION_PAGE:
-      return {
-        ...state,
-        pagination: { ...state.pagination, currentPage: action.payload },
-      };
+
     default:
       return state;
   }

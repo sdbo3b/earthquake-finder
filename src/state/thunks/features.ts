@@ -4,8 +4,6 @@ import {
   setFeaturesError,
   setFeaturesLoaded,
   setFeaturesLoading,
-  setPaginationIndex,
-  setPaginationPage,
 } from "../action-creators";
 import { FormName } from "../util";
 
@@ -13,8 +11,7 @@ export const fetchCircularData =
   (latitude: any, longitude: any, maxRadiusKm: any): any =>
   async (dispatch: AppDispatch, getState: RootState) => {
     dispatch(setFeaturesLoading());
-    dispatch(setPaginationIndex(0));
-    dispatch(setPaginationPage(1));
+
     earthquakeClient
       .circularQuery({
         latitude: latitude,
@@ -44,8 +41,6 @@ export const fetchRectangular =
   ): any =>
   async (dispatch: AppDispatch, getState: RootState) => {
     dispatch(setFeaturesLoading());
-    dispatch(setPaginationIndex(0));
-    dispatch(setPaginationPage(1));
     earthquakeClient
       .rectangularQuery({
         minlatitude: minLatitude,
