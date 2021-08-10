@@ -24,7 +24,7 @@ const FormContainer: React.FC = () => {
 
   return (
     <div className="flex-grow-1 d-flex flex-column">
-      <div className="">
+      <div className="pt-5">
         <FormHeader />
       </div>
       <div className="flex-grow-1 d-flex justify-content-center">

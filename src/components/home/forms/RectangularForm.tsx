@@ -30,6 +30,8 @@ const RectangularForm: React.FC = () => {
   };
 
   const onSubmit = (e: any) => {
+    e.preventDefault();
+
     dispatch(
       fetchRectangular(
         rectangularFormState.minLatitude,
@@ -41,9 +43,11 @@ const RectangularForm: React.FC = () => {
   };
 
   return (
-    <div className="flex-grow-1">
-      <div className="row gy-0 gx-0 align-items-center justify-content-center">
-        <h2 className="fs-5 col-12 text-center text-danger">{isError()}</h2>
+    <form className="flex-grow-1 d-flex" onSubmit={onSubmit}>
+      <div className="flex-grow-1 row gy-0 gx-0 align-items-center justify-content-center">
+        <h2 className="fs-5 col-12 text-center text-danger align-self-start pt-5">
+          {isError()}
+        </h2>
         <div className="col-sm-12 row justify-content-center">
           <label htmlFor="min-latitude" className="text-center">
             Minimum Latitude (Decimal [-90,90] degrees)
@@ -82,9 +86,9 @@ const RectangularForm: React.FC = () => {
               }
             />
           </div>
-        </div>
 
-        <div className="col-12 row justify-content-center">
+          <div className="w-100"></div>
+
           <label htmlFor="min-longitude" className="text-center">
             Minimum Longitude (Decimal [-360,360] degrees)
           </label>
@@ -104,7 +108,6 @@ const RectangularForm: React.FC = () => {
             />
           </div>
           <div className="w-100"></div>
-
           <label htmlFor="max-longitude" className="text-center">
             Maximum Longitude (Decimal [-360,360] degrees)
           </label>
@@ -124,16 +127,19 @@ const RectangularForm: React.FC = () => {
             />
           </div>
         </div>
-        <div className="form-button-icon col-sm-12">
-          <i className="icon">
-            <Search />
-          </i>
-          <button type="submit" className="form-button" onClick={onSubmit}>
-            Search
-          </button>
+
+        <div className="col-sm-12 align-self-end pb-5 d-flex justify-content-center">
+          <div className="form-button-icon ">
+            <i className="icon">
+              <Search />
+            </i>
+            <button type="submit" className="form-button" onClick={onSubmit}>
+              Search
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

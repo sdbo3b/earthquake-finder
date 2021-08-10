@@ -8,7 +8,7 @@ const Events: React.FC = () => {
   return (
     <div className="flex-grow-1 primary-color text-light row gy-0 gx-0 justify-content-center">
       {featureState.map((feature) => (
-        <EventCard feature={feature} />
+        <EventCard key={feature.id} feature={feature} />
       ))}
     </div>
   );
