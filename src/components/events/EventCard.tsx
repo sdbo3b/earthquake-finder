@@ -8,7 +8,6 @@ interface EventCardProps {
 }
 
 const EventCard: React.FC<EventCardProps> = ({ feature }) => {
-  // Load map after component renders
   useEffect(() => {
     var map = L.map(`mapid${feature.id}`).setView(
       [feature.geometry["coordinates"][1], feature.geometry["coordinates"][0]],

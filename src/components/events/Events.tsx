@@ -1,5 +1,11 @@
 import React from "react";
 import { useState } from "react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "react-feather";
 import { useAppSelector } from "../../state/hooks";
 import EventCard from "./EventCard";
 
@@ -16,7 +22,7 @@ const Events: React.FC = () => {
       : (numOfFeatures - (numOfFeatures % featuresPerPage)) / featuresPerPage;
 
   // Calculates the appropriate amount of features per page
-  const getFeatures = () => {
+  const getPageFeatures = () => {
     let features;
 
     if (featureState.length <= featuresPerPage) features = [...featureState];
@@ -32,8 +38,11 @@ const Events: React.FC = () => {
   // Calculates the appropriate nav page numbers
   const getPages = () => {
     let pages = [pageIndex / 8];
-    if (numOfPages > 1) pages.push(pageIndex / 8 + 1);
-    if (numOfPages > 2) pages.push(pageIndex / 8 + 2);
+    if (!(pageIndex + 8 >= featureState.length - 1)) {
+      if (numOfPages > 1) pages.push(pageIndex / 8 + 1);
+      if (!(pageIndex + 16 >= featureState.length - 1))
+        if (numOfPages > 2) pages.push(pageIndex / 8 + 2);
+    }
 
     return pages.map((page) => {
       return (
@@ -51,8 +60,24 @@ const Events: React.FC = () => {
 
   const getNav = () => {
     return (
-      <nav className="pt-3" aria-label="...">
-        <ul className="pagination">
+      <nav className="pt-3 row " aria-label="...">
+        <p className="col-sm-6 text-light d-flex justify-content-center align-items-center">
+          <span>
+            {" "}
+            Page {pageIndex / 8 + 1} of {numOfPages}
+          </span>
+        </p>
+        <ul className="col-sm-6 pagination d-flex justify-content-center align-items-center">
+          <li className={`page-item ${pageIndex - 8 < 0 && "disabled"}`}>
+            <button
+              className="page-link"
+              tabIndex={-1}
+              aria-disabled="true"
+              onClick={() => setPageIndex(0)}
+            >
+              <ChevronsLeft size={18} />
+            </button>
+          </li>
           <li className={`page-item ${pageIndex - 8 < 0 && "disabled"}`}>
             <button
               className="page-link"
@@ -65,21 +90,40 @@ const Events: React.FC = () => {
                 })
               }
             >
-              Previous
+              <ChevronLeft size={18} />
             </button>
           </li>
           {getPages()}
-          <li className="page-item">
+          <li
+            className={`page-item ${
+              pageIndex + 8 >= featureState.length - 1 && "disabled"
+            }`}
+          >
             <button
               className="page-link"
               onClick={() =>
                 setPageIndex((prevIndex) => {
-                  if (prevIndex + 8 > featureState.length) return prevIndex;
+                  if (prevIndex + 8 >= featureState.length - 1)
+                    return prevIndex;
                   return prevIndex + 8;
                 })
               }
             >
-              Next
+              <ChevronRight size={18} />
+            </button>
+          </li>
+          <li
+            className={`page-item ${
+              pageIndex + 8 >= featureState.length - 1 && "disabled"
+            }`}
+          >
+            <button
+              className="page-link"
+              tabIndex={-1}
+              aria-disabled="true"
+              onClick={() => setPageIndex(numOfPages * 8)}
+            >
+              <ChevronsRight size={18} />
             </button>
           </li>
         </ul>
@@ -91,7 +135,7 @@ const Events: React.FC = () => {
     <div className="flex-grow-1 d-flex flex-column primary-color justify-content-center align-items-center">
       {getNav()}
       <div className="flex-grow-1 primary-color text-light row gy-0 gx-0 justify-content-center">
-        {getFeatures()}
+        {getPageFeatures()}
       </div>
       {getNav()}
     </div>
