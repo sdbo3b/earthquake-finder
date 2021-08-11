@@ -92,26 +92,24 @@ const CircularForm: React.FC = () => {
           </div>
           <div className="w-100"></div>
 
-          <div className="col-12 row justify-content-center">
-            <label htmlFor="max-radius" className="text-center">
-              Max Radius (Decimal [0, 20001.6] km)
-            </label>
-            <div className="form-input-icon col-sm-6">
-              <i className="icon">
-                <Globe />
-              </i>
-              <input
-                type="text"
-                name="max-radius"
-                placeholder="Max Radius"
-                className="form-input-field"
-                value={circularFormState.radius}
-                onChange={(e) => {
-                  if (e.target.value.match(decimalNumRegex))
-                    dispatch(setCircularFormRadius(e.target.value));
-                }}
-              />
-            </div>
+          <label htmlFor="max-radius" className="text-center">
+            Max Radius (Decimal [0, 20001.6] km)
+          </label>
+          <div className="form-input-icon col-sm-6">
+            <i className="icon">
+              <Globe />
+            </i>
+            <input
+              type="text"
+              name="max-radius"
+              placeholder="Max Radius"
+              className="form-input-field"
+              value={circularFormState.radius}
+              onChange={(e) => {
+                if (e.target.value.match(decimalNumRegex))
+                  dispatch(setCircularFormRadius(e.target.value));
+              }}
+            />
           </div>
         </div>
         <div className="col-sm-12 align-self-end pb-5 d-flex justify-content-center">
