@@ -24,7 +24,7 @@ const RenderSpinner: React.FC = () => {
   );
 };
 
-const featuresPerPage = 8;
+const featuresPerPage = 10;
 
 const Events: React.FC = () => {
   const { features, status } = useAppSelector((state) => state.featureState);
@@ -159,7 +159,6 @@ const Events: React.FC = () => {
       </nav>
     );
   };
-  console.log(status);
   const renderContent = () => {
     switch (status) {
       case FeaturesStatus.LOADING:
