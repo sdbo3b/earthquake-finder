@@ -9,7 +9,7 @@ const NavBar: React.FC = () => {
     <nav className="navbar navbar-expand-lg navbar-dark shadow primary-color">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand">
-          Earthquakes
+          Earthquake Finder
         </Link>
         <button
           className="navbar-toggler"
