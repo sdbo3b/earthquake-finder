@@ -1,14 +1,17 @@
 import React from "react";
 import { Globe, Search } from "react-feather";
+import { useHistory } from "react-router-dom";
 import "../../../styles/forms/form.css";
 
 const MapForm: React.FC = () => {
+  const history = useHistory();
   const isError = () => {
     return "";
   };
 
   const onSubmit = (e: any) => {
     e.preventDefault();
+    history.push("/Events");
   };
 
   return (

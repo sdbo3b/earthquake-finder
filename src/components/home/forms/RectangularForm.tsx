@@ -1,5 +1,6 @@
 import React from "react";
 import { Globe, Search } from "react-feather";
+import { useHistory } from "react-router-dom";
 import {
   setRectangularFormMaxLatitude,
   setRectangularFormMaxLongitude,
@@ -13,6 +14,7 @@ import "../../../styles/forms/form.css";
 
 const RectangularForm: React.FC = () => {
   const dispatch = useAppDispatch();
+  const history = useHistory();
   const rectangularFormState = useAppSelector(
     (state) => state.formsState.rectangularForm
   );
@@ -40,6 +42,7 @@ const RectangularForm: React.FC = () => {
         rectangularFormState.maxLongitude
       )
     );
+    history.push("/Events");
   };
 
   return (

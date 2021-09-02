@@ -7,50 +7,71 @@ import {
   ChevronsRight,
 } from "react-feather";
 import { useAppSelector } from "../../state/hooks";
+import { FeaturesStatus } from "../../state/util";
 import EventCard from "./EventCard";
+
+const RenderSpinner: React.FC = () => {
+  return (
+    <div className="w-100 h-100 d-flex justify-content-center align-items-center">
+      <div
+        className="spinner-border text-info"
+        style={{ width: "5rem", height: "5rem" }}
+        role="status"
+      >
+        <span className="visually-hidden"></span>
+      </div>
+    </div>
+  );
+};
 
 const featuresPerPage = 8;
 
 const Events: React.FC = () => {
-  const featureState = useAppSelector((state) => state.featureState.features);
+  const { features, status } = useAppSelector((state) => state.featureState);
   const [pageIndex, setPageIndex] = useState(0);
 
-  const numOfFeatures: number = featureState.length;
+  const numOfFeatures: number = features.length;
   let numOfPages: number =
-    numOfFeatures <= 8
+    numOfFeatures <= featuresPerPage
       ? 1
       : (numOfFeatures - (numOfFeatures % featuresPerPage)) / featuresPerPage;
 
   // Calculates the appropriate amount of features per page
   const getPageFeatures = () => {
-    let features;
+    let _features;
 
-    if (featureState.length <= featuresPerPage) features = [...featureState];
-    else if (pageIndex + featuresPerPage > featureState.length)
-      features = featureState.slice(pageIndex, featureState.length - 1);
-    else features = featureState.slice(pageIndex, pageIndex + featuresPerPage);
+    if (features.length <= featuresPerPage) _features = [...features];
+    else if (pageIndex + featuresPerPage > features.length)
+      _features = features.slice(pageIndex, features.length - 1);
+    else _features = features.slice(pageIndex, pageIndex + featuresPerPage);
 
-    return features.map((feature) => (
+    return _features.map((feature) => (
       <EventCard key={feature.id} feature={feature} />
     ));
   };
 
   // Calculates the appropriate nav page numbers
   const getPages = () => {
-    let pages = [pageIndex / 8];
-    if (!(pageIndex + 8 >= featureState.length - 1)) {
-      if (numOfPages > 1) pages.push(pageIndex / 8 + 1);
-      if (!(pageIndex + 16 >= featureState.length - 1))
-        if (numOfPages > 2) pages.push(pageIndex / 8 + 2);
+    let pages = [pageIndex / featuresPerPage];
+    if (!(pageIndex + featuresPerPage >= features.length - 1)) {
+      if (numOfPages > 1) pages.push(pageIndex / featuresPerPage + 1);
+      if (!(pageIndex + featuresPerPage * 2 >= features.length - 1))
+        if (numOfPages > 2) pages.push(pageIndex / featuresPerPage + 2);
     }
 
-    return pages.map((page) => {
+    return pages.map((page, index) => {
       return (
         <li
-          className={`page-item ${pageIndex / 8 === page && "active"} `}
+          key={index}
+          className={`page-item ${
+            pageIndex / featuresPerPage === page && "active"
+          } `}
           aria-current="page"
         >
-          <button className="page-link" onClick={(e) => setPageIndex(page * 8)}>
+          <button
+            className="page-link"
+            onClick={(e) => setPageIndex(page * featuresPerPage)}
+          >
             {page + 1}
           </button>
         </li>
@@ -64,11 +85,15 @@ const Events: React.FC = () => {
         <p className="col-sm-6 text-light d-flex justify-content-center align-items-center">
           <span>
             {" "}
-            Page {pageIndex / 8 + 1} of {numOfPages}
+            Page {pageIndex / featuresPerPage + 1} of {numOfPages}
           </span>
         </p>
         <ul className="col-sm-6 pagination d-flex justify-content-center align-items-center">
-          <li className={`page-item ${pageIndex - 8 < 0 && "disabled"}`}>
+          <li
+            className={`page-item ${
+              pageIndex - featuresPerPage < 0 && "disabled"
+            }`}
+          >
             <button
               className="page-link"
               tabIndex={-1}
@@ -78,15 +103,19 @@ const Events: React.FC = () => {
               <ChevronsLeft size={18} />
             </button>
           </li>
-          <li className={`page-item ${pageIndex - 8 < 0 && "disabled"}`}>
+          <li
+            className={`page-item ${
+              pageIndex - featuresPerPage < 0 && "disabled"
+            }`}
+          >
             <button
               className="page-link"
               tabIndex={-1}
               aria-disabled="true"
               onClick={() =>
                 setPageIndex((prevIndex) => {
-                  if (prevIndex - 8 < 0) return 0;
-                  return prevIndex - 8;
+                  if (prevIndex - featuresPerPage < 0) return 0;
+                  return prevIndex - featuresPerPage;
                 })
               }
             >
@@ -96,16 +125,16 @@ const Events: React.FC = () => {
           {getPages()}
           <li
             className={`page-item ${
-              pageIndex + 8 >= featureState.length - 1 && "disabled"
+              pageIndex + featuresPerPage >= features.length - 1 && "disabled"
             }`}
           >
             <button
               className="page-link"
               onClick={() =>
                 setPageIndex((prevIndex) => {
-                  if (prevIndex + 8 >= featureState.length - 1)
+                  if (prevIndex + featuresPerPage >= features.length - 1)
                     return prevIndex;
-                  return prevIndex + 8;
+                  return prevIndex + featuresPerPage;
                 })
               }
             >
@@ -114,14 +143,14 @@ const Events: React.FC = () => {
           </li>
           <li
             className={`page-item ${
-              pageIndex + 8 >= featureState.length - 1 && "disabled"
+              pageIndex + featuresPerPage >= features.length - 1 && "disabled"
             }`}
           >
             <button
               className="page-link"
               tabIndex={-1}
               aria-disabled="true"
-              onClick={() => setPageIndex(numOfPages * 8)}
+              onClick={() => setPageIndex(numOfPages * featuresPerPage)}
             >
               <ChevronsRight size={18} />
             </button>
@@ -130,14 +159,43 @@ const Events: React.FC = () => {
       </nav>
     );
   };
+  console.log(status);
+  const renderContent = () => {
+    switch (status) {
+      case FeaturesStatus.LOADING:
+        return <RenderSpinner />;
+      case FeaturesStatus.LOADED:
+        return (
+          <React.Fragment>
+            {getNav()}
+            <div className="flex-grow-1 primary-color text-light row gy-0 gx-0 justify-content-center">
+              {getPageFeatures()}
+            </div>
+            {getNav()}
+          </React.Fragment>
+        );
+      case FeaturesStatus.ERROR:
+        return (
+          <div>
+            <p className="text-danger">Error loading data</p>
+          </div>
+        );
+      default:
+        return (
+          <React.Fragment>
+            {getNav()}
+            <div className="flex-grow-1 primary-color text-light row gy-0 gx-0 justify-content-center">
+              {getPageFeatures()}
+            </div>
+            {getNav()}
+          </React.Fragment>
+        );
+    }
+  };
 
   return (
     <div className="flex-grow-1 d-flex flex-column primary-color justify-content-center align-items-center">
-      {getNav()}
-      <div className="flex-grow-1 primary-color text-light row gy-0 gx-0 justify-content-center">
-        {getPageFeatures()}
-      </div>
-      {getNav()}
+      {renderContent()}
     </div>
   );
 };

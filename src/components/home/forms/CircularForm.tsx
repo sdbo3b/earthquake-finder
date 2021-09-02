@@ -1,5 +1,6 @@
 import React from "react";
 import { Globe, Search } from "react-feather";
+import { useHistory } from "react-router-dom";
 import {
   setCircularFormLatitude,
   setCircularFormLongitude,
@@ -16,6 +17,7 @@ const decimalNumRegex = /^\d{0,5}(\.\d*)?$/;
 
 const CircularForm: React.FC = () => {
   const dispatch = useAppDispatch();
+  const history = useHistory();
   const circularFormState = useAppSelector(
     (state) => state.formsState.circularForm
   );
@@ -42,6 +44,7 @@ const CircularForm: React.FC = () => {
         circularFormState.radius
       )
     );
+    history.push("/Events");
   };
 
   return (
