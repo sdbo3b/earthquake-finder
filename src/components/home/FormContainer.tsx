@@ -3,7 +3,6 @@ import { useAppSelector } from "../../state/hooks";
 import { FormName } from "../../state/util";
 import CircularForm from "./forms/CircularForm";
 import FormHeader from "./forms/FormHeader";
-import MapForm from "./forms/MapForm";
 import RectangularForm from "./forms/RectangularForm";
 
 const FormContainer: React.FC = () => {
@@ -17,8 +16,8 @@ const FormContainer: React.FC = () => {
         return <CircularForm />;
       case FormName.RECTANGULAR:
         return <RectangularForm />;
-      case FormName.MAP:
-        return <MapForm />;
+      default:
+        return <CircularForm />;
     }
   };
 

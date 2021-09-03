@@ -26,14 +26,11 @@ export interface FormsState {
     minLongitude: string;
     maxLongitude: string;
   };
-  MapForm: {
-    radius: string;
-  };
 }
 
 export const initialFormsState: FormsState = {
   formIndex: 0,
-  forms: [FormName.CIRCULAR, FormName.RECTANGULAR, FormName.MAP],
+  forms: [FormName.CIRCULAR, FormName.RECTANGULAR],
   circularForm: {
     latitude: "",
     longitude: "",
@@ -44,9 +41,6 @@ export const initialFormsState: FormsState = {
     maxLatitude: "",
     minLongitude: "",
     maxLongitude: "",
-  },
-  MapForm: {
-    radius: "",
   },
 };
 
