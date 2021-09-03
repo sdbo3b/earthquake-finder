@@ -9,7 +9,7 @@ const Home: React.FC = () => {
       <div className="col-sm-6 d-flex">
         <FormContainer />
       </div>
-      <div className="col-sm-6">
+      <div className="col-sm-6 d-flex justify-content-center align-items-center">
         <Map />
       </div>
     </div>

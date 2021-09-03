@@ -37,7 +37,7 @@ const EventCard: React.FC<EventCardProps> = ({ feature }) => {
   return (
     <div
       className="card mx-2 my-2"
-      style={{ width: "24rem", maxHeight: "55%" }}
+      style={{ width: "24rem", maxHeight: "55%", maxWidth: "300px" }}
     >
       <div id={`mapid${feature.id}`} className="card-img-top card-map"></div>
       <div className="card-body text-dark">
@@ -52,14 +52,14 @@ const EventCard: React.FC<EventCardProps> = ({ feature }) => {
         <p className="card-text">
           Longitude: {feature.geometry["coordinates"][0]}
         </p>
-        <a
-          href={feature.properties?.url}
-          target="_blank"
-          className="btn btn-primary"
-        >
-          Click here for more details
-        </a>
       </div>
+      <a
+        href={feature.properties?.url}
+        target="_blank"
+        className="btn btn-primary align-self-end justify-self-center w-100"
+      >
+        Click here for more details
+      </a>
     </div>
   );
 };
