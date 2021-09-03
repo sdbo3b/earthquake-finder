@@ -52,7 +52,11 @@ const EventCard: React.FC<EventCardProps> = ({ feature }) => {
         <p className="card-text">
           Longitude: {feature.geometry["coordinates"][0]}
         </p>
-        <a href={feature.properties?.url} className="btn btn-primary">
+        <a
+          href={feature.properties?.url}
+          target="_blank"
+          className="btn btn-primary"
+        >
           Click here for more details
         </a>
       </div>

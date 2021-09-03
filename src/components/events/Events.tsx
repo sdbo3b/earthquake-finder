@@ -181,13 +181,9 @@ const Events: React.FC = () => {
         );
       default:
         return (
-          <React.Fragment>
-            {getNav()}
-            <div className="flex-grow-1 primary-color text-light row gy-0 gx-0 justify-content-center">
-              {getPageFeatures()}
-            </div>
-            {getNav()}
-          </React.Fragment>
+          <div className="text-light">
+            <p>Start a query to show events</p>
+          </div>
         );
     }
   };
