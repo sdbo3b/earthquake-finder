@@ -72,7 +72,7 @@ const Events: React.FC = () => {
             className="page-link"
             onClick={(e) => setPageIndex(page * featuresPerPage)}
           >
-            {page + 1}
+            {page}
           </button>
         </li>
       );
@@ -85,7 +85,7 @@ const Events: React.FC = () => {
         <p className="col-sm-6 text-light d-flex justify-content-center align-items-center">
           <span>
             {" "}
-            Page {pageIndex / featuresPerPage + 1} of {numOfPages}
+            Page {pageIndex / featuresPerPage} of {numOfPages}
           </span>
         </p>
         <ul className="col-sm-6 pagination d-flex justify-content-center align-items-center">
