@@ -56,6 +56,7 @@ const EventCard: React.FC<EventCardProps> = ({ feature }) => {
       <a
         href={feature.properties?.url}
         target="_blank"
+        rel="noreferrer"
         className="btn btn-primary align-self-end justify-self-center w-100"
       >
         Click here for more details

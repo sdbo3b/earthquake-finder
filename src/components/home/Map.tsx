@@ -1,19 +1,25 @@
 import React, { useEffect } from "react";
 import L from "leaflet";
+import { useAppDispatch } from "../../state/hooks";
+import {
+  setCircularFormLatitude,
+  setCircularFormLongitude,
+} from "../../state/action-creators";
 
-// TODO: Fix Radius on click
-
-const decimalNumRegex = /^\d{0,5}(\.\d*)?$/;
 let map: L.Map;
 let circle: L.Circle;
 let marker: L.Marker;
 
 const Map: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const onMapClick = (e: any) => {
     const { lat, lng } = e.latlng;
     marker.setLatLng([lat, lng]);
     // radius in meters
     circle.setLatLng([lat, lng]).setRadius(1000 * 1000);
+    dispatch(setCircularFormLatitude(lat));
+    dispatch(setCircularFormLongitude(lng));
   };
 
   // Load map a single time after component renders
