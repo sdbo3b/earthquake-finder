@@ -2,6 +2,7 @@ import React from "react";
 import { Globe, Search } from "react-feather";
 import { useHistory } from "react-router-dom";
 import {
+  setRectangularFormError,
   setRectangularFormMaxLatitude,
   setRectangularFormMaxLongitude,
   setRectangularFormMinLatitude,
@@ -9,40 +10,40 @@ import {
 } from "../../../state/action-creators";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import { fetchRectangular } from "../../../state/thunks";
-import { FeaturesStatus, FormName } from "../../../state/util";
 import "../../../styles/forms/form.css";
 
 const RectangularForm: React.FC = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const rectangularFormState = useAppSelector(
-    (state) => state.formsState.rectangularForm
-  );
+  const { minLatitude, maxLatitude, minLongitude, maxLongitude, error } =
+    useAppSelector((state) => state.formsState.rectangularForm);
 
-  const errorState = useAppSelector((state) => state.featureState.error);
-  const featureStatus = useAppSelector((state) => state.featureState.status);
-
-  const isError = () => {
-    if (
-      errorState.form === FormName.RECTANGULAR &&
-      featureStatus === FeaturesStatus.ERROR
-    ) {
-      return errorState.msg;
-    }
+  const isError = () => error;
+  const validateForm = (): string => {
+    if (!(maxLatitude && minLatitude && minLongitude && maxLongitude))
+      return "Please fill out all fields";
+    else if (minLatitude > maxLatitude)
+      return "min latitude must be <= max latitude";
+    else if (minLongitude > maxLongitude)
+      return "min longitude must be <= max longitude";
+    else return "";
   };
+  const setFormError = (error: string) =>
+    dispatch(setRectangularFormError(error));
 
   const onSubmit = (e: any) => {
     e.preventDefault();
+    const message: string = validateForm();
 
-    dispatch(
-      fetchRectangular(
-        rectangularFormState.minLatitude,
-        rectangularFormState.minLongitude,
-        rectangularFormState.maxLatitude,
-        rectangularFormState.maxLongitude
-      )
-    );
-    history.push("/Events");
+    if (!message) {
+      dispatch(
+        fetchRectangular(minLatitude, minLongitude, maxLatitude, maxLongitude)
+      );
+      history.push("/Events");
+      setFormError("");
+    } else {
+      setFormError(message);
+    }
   };
 
   return (
@@ -64,7 +65,7 @@ const RectangularForm: React.FC = () => {
               name="min-latitude"
               placeholder="Min Latitude"
               className="form-input-field"
-              value={rectangularFormState.minLatitude}
+              value={minLatitude}
               onChange={(e) =>
                 dispatch(setRectangularFormMinLatitude(e.target.value))
               }
@@ -83,7 +84,7 @@ const RectangularForm: React.FC = () => {
               name="max-latitude"
               placeholder="Max Latitude"
               className="form-input-field"
-              value={rectangularFormState.maxLatitude}
+              value={maxLatitude}
               onChange={(e) =>
                 dispatch(setRectangularFormMaxLatitude(e.target.value))
               }
@@ -104,7 +105,7 @@ const RectangularForm: React.FC = () => {
               name="min-longitude"
               placeholder="Min Longitude"
               className="form-input-field"
-              value={rectangularFormState.minLongitude}
+              value={minLongitude}
               onChange={(e) =>
                 dispatch(setRectangularFormMinLongitude(e.target.value))
               }
@@ -123,7 +124,7 @@ const RectangularForm: React.FC = () => {
               name="max-longitude"
               placeholder="Max Longitude"
               className="form-input-field"
-              value={rectangularFormState.maxLongitude}
+              value={maxLongitude}
               onChange={(e) =>
                 dispatch(setRectangularFormMaxLongitude(e.target.value))
               }

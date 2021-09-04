@@ -4,6 +4,7 @@ import { useAppDispatch } from "../../state/hooks";
 import {
   setCircularFormLatitude,
   setCircularFormLongitude,
+  setCircularFormRadius,
 } from "../../state/action-creators";
 
 let map: L.Map;
@@ -20,6 +21,7 @@ const Map: React.FC = () => {
     circle.setLatLng([lat, lng]).setRadius(1000 * 1000);
     dispatch(setCircularFormLatitude(lat));
     dispatch(setCircularFormLongitude(lng));
+    dispatch(setCircularFormRadius((circle.getRadius() / 1000).toString()));
   };
 
   // Load map a single time after component renders

@@ -2,13 +2,13 @@ import React from "react";
 import { Globe, Search } from "react-feather";
 import { useHistory } from "react-router-dom";
 import {
+  setCircularFormError,
   setCircularFormLatitude,
   setCircularFormLongitude,
   setCircularFormRadius,
 } from "../../../state/action-creators";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import { fetchCircularData } from "../../../state/thunks";
-import { FeaturesStatus, FormName } from "../../../state/util";
 import "../../../styles/forms/form.css";
 
 const latRegex = /^(-)?([0-9]{0,2})(\.\d*)?$/;
@@ -18,33 +18,31 @@ const decimalNumRegex = /^\d{0,5}(\.\d*)?$/;
 const CircularForm: React.FC = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const circularFormState = useAppSelector(
+  const { latitude, longitude, radius, error } = useAppSelector(
     (state) => state.formsState.circularForm
   );
 
-  const errorState = useAppSelector((state) => state.featureState.error);
-  const featureStatus = useAppSelector((state) => state.featureState.status);
-
-  const isError = () => {
-    if (
-      errorState.form === FormName.CIRCULAR &&
-      featureStatus === FeaturesStatus.ERROR
-    ) {
-      return errorState.msg;
-    }
+  const isError = () => error;
+  const validateForm = (): string => {
+    if (!(latitude && longitude && radius)) return "Please fill out all fields";
+    else if (Number.parseFloat(radius) > 20001.6)
+      return "radius must be <= 20001.6";
+    else return "";
   };
+
+  const setFormError = (error: string) => dispatch(setCircularFormError(error));
 
   const onSubmit = (e: any) => {
     e.preventDefault();
+    const message: string = validateForm();
 
-    dispatch(
-      fetchCircularData(
-        circularFormState.latitude,
-        circularFormState.longitude,
-        circularFormState.radius
-      )
-    );
-    history.push("/Events");
+    if (!message) {
+      dispatch(fetchCircularData(latitude, longitude, radius));
+      setFormError("");
+      history.push("/Events");
+    } else {
+      setFormError(message);
+    }
   };
 
   return (
@@ -66,7 +64,7 @@ const CircularForm: React.FC = () => {
               name="latitude"
               placeholder="Latitude"
               className="form-input-field"
-              value={circularFormState.latitude}
+              value={latitude}
               onChange={(e) => {
                 if (e.target.value.match(latRegex))
                   dispatch(setCircularFormLatitude(e.target.value));
@@ -86,7 +84,7 @@ const CircularForm: React.FC = () => {
               name="longitude"
               placeholder="Longitude"
               className="form-input-field"
-              value={circularFormState.longitude}
+              value={longitude}
               onChange={(e) => {
                 if (e.target.value.match(lonRegex))
                   dispatch(setCircularFormLongitude(e.target.value));
@@ -107,7 +105,7 @@ const CircularForm: React.FC = () => {
               name="max-radius"
               placeholder="Max Radius"
               className="form-input-field"
-              value={circularFormState.radius}
+              value={radius}
               onChange={(e) => {
                 if (e.target.value.match(decimalNumRegex))
                   dispatch(setCircularFormRadius(e.target.value));

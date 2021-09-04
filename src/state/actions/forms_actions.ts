@@ -23,6 +23,11 @@ export interface SetCircularFormRadius {
   payload: string;
 }
 
+export interface SetCircularFormError {
+  type: FormsActionType.SET_CIRCULAR_FORM_ERROR;
+  payload: string;
+}
+
 export interface SetRectangularFormMinLatitude {
   type: FormsActionType.SET_RECTANGULAR_FORM_MIN_LATITUDE;
   payload: string;
@@ -40,5 +45,10 @@ export interface SetRectangularFormMinLongitude {
 
 export interface SetRectangularFormMaxLongitude {
   type: FormsActionType.SET_RECTANGULAR_FORM_MAX_LONGITUDE;
+  payload: string;
+}
+
+export interface SetRectangularFormError {
+  type: FormsActionType.SET_RECTANGULAR_FORM_ERROR;
   payload: string;
 }
