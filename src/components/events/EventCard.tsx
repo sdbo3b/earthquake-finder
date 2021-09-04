@@ -35,9 +35,13 @@ const EventCard: React.FC<EventCardProps> = ({ feature }) => {
   return (
     <div
       className="card mx-2 my-2"
-      style={{ width: "24rem", maxHeight: "55%", maxWidth: "300px" }}
+      style={{ width: "24rem", height: "550px", maxWidth: "300px" }}
     >
-      <div id={`mapid${feature.id}`} className="card-img-top card-map"></div>
+      <div
+        id={`mapid${feature.id}`}
+        className="card-img-top card-map"
+        style={{ minHeight: "200px" }}
+      ></div>
       <div className="card-body text-dark">
         <h5 className="card-title">{feature.properties?.place}</h5>
         <p className="card-text">Magnitude: {feature.properties?.mag}</p>
