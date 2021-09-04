@@ -1,6 +1,6 @@
 # About The App
 
-The app allows you to easily query earthquake event data across regions.
+A web app that allows you to query earthquake events across regions.
 
 ## Install Dependencies Using Node.js Npm
 
