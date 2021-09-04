@@ -26,3 +26,7 @@ You may serve it with a static server:
 
 npm install -g serve \
 serve -s build
+
+# Live Example
+
+At [https://earthquake-finder.web.app/](https://earthquake-finder.web.app/)

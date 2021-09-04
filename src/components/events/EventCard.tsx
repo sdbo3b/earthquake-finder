@@ -27,9 +27,7 @@ const EventCard: React.FC<EventCardProps> = ({ feature }) => {
       }
     ).addTo(map);
 
-    // temp. TODO: update model
-    type adapter = typeof feature | any;
-    const feat: adapter = feature;
+    const feat: typeof feature | any = feature;
     L.geoJSON(feat).addTo(map);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

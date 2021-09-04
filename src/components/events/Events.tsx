@@ -25,7 +25,7 @@ const RenderSpinner: React.FC = () => {
   );
 };
 
-const featuresPerPage = 10;
+const featuresPerPage = 4;
 
 const Events: React.FC = () => {
   const { features, status } = useAppSelector((state) => state.featureState);
@@ -42,7 +42,7 @@ const Events: React.FC = () => {
     let _features;
 
     if (features.length <= featuresPerPage) _features = [...features];
-    else if (pageIndex + featuresPerPage > features.length)
+    else if (pageIndex + featuresPerPage >= features.length)
       _features = features.slice(pageIndex, features.length - 1);
     else _features = features.slice(pageIndex, pageIndex + featuresPerPage);
 
@@ -83,13 +83,13 @@ const Events: React.FC = () => {
   const getNav = () => {
     return (
       <nav className="pt-3 row " aria-label="...">
-        <p className="col-sm-6 text-light d-flex justify-content-center align-items-center">
+        <p className="col-sm-12 text-light d-flex justify-content-center align-items-center">
           <span>
             {" "}
             Page {pageIndex / featuresPerPage} of {numOfPages}
           </span>
         </p>
-        <ul className="col-sm-6 pagination d-flex justify-content-center align-items-center">
+        <ul className="col-sm-12 pagination d-flex justify-content-center align-items-center">
           <li
             className={`page-item ${
               pageIndex - featuresPerPage < 0 && "disabled"
@@ -168,7 +168,7 @@ const Events: React.FC = () => {
         return (
           <React.Fragment>
             {getNav()}
-            <div className="flex-grow-1 primary-color text-light row gy-0 gx-0 justify-content-center">
+            <div className="flex-grow-1 primary-color text-light row gy-0 gx-0 justify-content-center align-items-center">
               {getPageFeatures()}
             </div>
             {getNav()}
